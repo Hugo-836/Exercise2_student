@@ -60,20 +60,20 @@ private:
   double Emec(double theta, double thetadot, double t_)
   {
 
-      return 0.;
+      return 1/2*m*pow(L*thetadot,2) + m*g*L*(1-cos(theta));
   }
 
   // TODO definir la puissance des forces non conservatives
   double Pnonc(double theta, double thetadot, double t_)
   {
 
-      return 0.;
+      return -kappa*pow(L*thetadot,2) + m*L*Omega*Omega*r*sin(Omega*t_-theta)*thetadot;
   }
 
   // TODO écrire la fonction pour l'acceleration (theta_doubledot)
   double compute_acc(double theta, double thetadot, double t_)
   {
-      double acc = 0.;
+      double acc = (-g*sin(theta) - kappa/m*(L*thetadot+r*Omega*cos(Omega*t_-theta)) + Omega*Omega*r*sin(Omega*t_-theta))/L;
 
       return acc;
   }
