@@ -67,7 +67,7 @@ private:
   double Pnonc(double theta, double thetadot, double t_)
   {
 
-      return -kappa*pow(L*thetadot,2) + m*L*Omega*Omega*r*sin(Omega*t_-theta)*thetadot;
+      return -kappa*pow(L*thetadot,2)-kappa*r*L*Omega*cos(Omega*t_-theta)*thetadot + m*L*Omega*Omega*r*sin(Omega*t_-theta)*thetadot;
   }
 
   // TODO écrire la fonction pour l'acceleration (theta_doubledot)
@@ -81,7 +81,23 @@ private:
   void step()
   {
 
-    t += dt;
+    double a_n = compute_acc(theta, thetadot, t);
+
+    double theta_new = theta + thetadot*dt + 0.5*a_n*dt*dt;
+
+    // prédiction de la vitesse au temps suivant
+    double thetadot_pred = thetadot + 0.5*a_n*dt;
+
+    double t_new = t + dt;
+
+    double a_np1 = compute_acc(theta, thetadot_pred, t);
+    double a_np2 = compute_acc(theta_new, thetadot_pred, t_new);
+
+    double thetadot_new = thetadot + 0.5*(a_np1 + a_np2)*dt;
+
+    theta = theta_new;
+    thetadot = thetadot_new;
+    t = t_new;
   }
 
 
