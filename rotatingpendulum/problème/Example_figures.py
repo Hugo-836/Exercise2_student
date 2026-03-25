@@ -10,7 +10,7 @@ import math
 # USER SETTINGS
 # ============================================================
 
-folder = r"/Users/hugo/Documents/Exercise2_student/Exercise2_student/rotatingpendulum/problème/Scan_nsteps_pendulum_kappa_0_r_0_Omega_2"
+folder = r"/Users/pablitoooooo/Desktop/Physique Num/Exo 2/Exercise2_student/rotatingpendulum/problème/Scan_nsteps_pendulum_kappa_0_r_0_Omega_2"
 
 plot_layout = {
     "theta_time": True,
@@ -309,6 +309,3 @@ if plot_layout["energy_balance"]:
     axes[0].legend()
 
 fig.savefig(os.path.join(fig_dir,"energy_balance_all.png"), dpi=300)
-
-
-plt.show()
